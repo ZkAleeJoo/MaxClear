@@ -1,6 +1,6 @@
 package clp.zkaleejoo.commands;
 
-import clp.zkaleejoo.ClearLagPlus;
+import clp.zkaleejoo.MaxClear;
 import clp.zkaleejoo.utils.MessageUtils;
 import clp.zkaleejoo.utils.EntityClearer;
 import org.bukkit.command.Command;
@@ -14,9 +14,9 @@ import java.util.List;
 
 public class MainCommand implements CommandExecutor, TabCompleter {
 
-    private ClearLagPlus plugin;
+    private MaxClear plugin;
 
-    public MainCommand(ClearLagPlus plugin){
+    public MainCommand(MaxClear plugin){
         this.plugin = plugin;
     }
 
@@ -46,7 +46,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
 
         Player player = (Player) sender;
 
-        if (!player.hasPermission("clearlagplus.admin")) {
+        if (!player.hasPermission("maxclear.admin")) {
             player.sendMessage(MessageUtils.getColoredMessage(plugin.getMainConfigManager().getPrefix() + plugin.getMainConfigManager().getNoPermission()));
             return true;
         }
@@ -75,10 +75,10 @@ public class MainCommand implements CommandExecutor, TabCompleter {
     }
 
     public void help(CommandSender sender){
-        sender.sendMessage(MessageUtils.getColoredMessage("&8[&fClearLag&e+&8] &fList of commands: "+ plugin.getDescription().getVersion()));
-        sender.sendMessage(MessageUtils.getColoredMessage("&9> &a/clearlagplus reload"));
-        sender.sendMessage(MessageUtils.getColoredMessage("&9> &a/clearlagplus clear"));
-        sender.sendMessage(MessageUtils.getColoredMessage("&9> &a/clearlagplus get <author/version>"));
+        sender.sendMessage(MessageUtils.getColoredMessage("&e&lMaxClear &fList of commands: "+ plugin.getDescription().getVersion()));
+        sender.sendMessage(MessageUtils.getColoredMessage("&9> &a/maxclear reload"));
+        sender.sendMessage(MessageUtils.getColoredMessage("&9> &a/maxclear clear"));
+        sender.sendMessage(MessageUtils.getColoredMessage("&9> &a/maxclear get <author/version>"));
     }
 
     public void subcommandGet(CommandSender sender, String[] args){
@@ -104,7 +104,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
         List<String> completions = new ArrayList<>();
 
 
-        if (!sender.hasPermission("clearlagplus.admin")) {
+        if (!sender.hasPermission("maxclear.admin")) {
             return completions;
         }
 

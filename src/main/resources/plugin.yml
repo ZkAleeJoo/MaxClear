@@ -1,15 +1,15 @@
-main: clp.zkaleejoo.ClearLagPlus
+main: clp.zkaleejoo.MaxClear
 version: ${project.version}
-name: ClearLagPlus
+name: MaxClear
 author: ZkAleeJoo
 api-version: 1.19
 
 commands:
-  clearlagplus:
-    description: ClearLagPlus main command - reload, clear, get
-    aliases: [clp]
+  maxclear:
+    description: MaxClear main command - reload, clear, get
+    aliases: [mc]
 
 permissions:
-  clearlagplus.admin:
-    description: Administrator permissions for ClearLagPlus
+  maxclear.admin:
+    description: Administrator permissions for MaxClear
     default: op

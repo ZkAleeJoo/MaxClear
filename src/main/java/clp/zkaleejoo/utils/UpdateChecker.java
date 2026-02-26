@@ -1,25 +1,26 @@
 package clp.zkaleejoo.utils;
 
 import org.bukkit.Bukkit;
-import clp.zkaleejoo.ClearLagPlus;
+import clp.zkaleejoo.MaxClear;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
 public class UpdateChecker {
-    private final ClearLagPlus plugin;
+    private final MaxClear plugin;
     private final String slug = "clearlag+"; 
 
-    public UpdateChecker(ClearLagPlus plugin) {
+    public UpdateChecker(MaxClear plugin) {
         this.plugin = plugin;
     }
 
     public void getVersion(final Consumer<String> consumer) {
         Bukkit.getScheduler().runTaskAsynchronously(this.plugin, () -> {
             try {
-                URL url = new URL("https://api.modrinth.com/v2/project/" + slug + "/version");
+                URL url = URI.create("https://api.modrinth.com/v2/project/" + slug + "/version").toURL();
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestProperty("User-Agent", "ClearLagPlus/UpdateChecker/" + plugin.getDescription().getVersion());
                 

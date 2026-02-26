@@ -1,6 +1,6 @@
 package clp.zkaleejoo.managers;
 
-import clp.zkaleejoo.ClearLagPlus;
+import clp.zkaleejoo.MaxClear;
 import clp.zkaleejoo.utils.EntityClearer;
 import clp.zkaleejoo.utils.MessageUtils;
 import org.bukkit.Bukkit;
@@ -8,12 +8,12 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class TaskManager {
 
-    private final ClearLagPlus plugin;
+    private final MaxClear plugin;
     private final EntityClearer entityClearer;
     private int taskId = -1;
     private int warningTaskId = -1;
 
-    public TaskManager(ClearLagPlus plugin) {
+    public TaskManager(MaxClear plugin) {
         this.plugin = plugin;
         this.entityClearer = new EntityClearer(plugin);
     }

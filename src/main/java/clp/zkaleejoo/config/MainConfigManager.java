@@ -1,6 +1,6 @@
 package clp.zkaleejoo.config;
 
-import clp.zkaleejoo.ClearLagPlus;
+import clp.zkaleejoo.MaxClear;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.List;
@@ -32,7 +32,7 @@ public class MainConfigManager {
     private boolean updateCheckEnabled;
     private String msgUpdateAvailable;
 
-    public MainConfigManager(ClearLagPlus plugin){
+    public MainConfigManager(MaxClear plugin){
         configFile = new CustomConfig("config.yml", null, plugin, false);
         configFile.registerConfig();
         loadConfig();

@@ -1,6 +1,6 @@
 package clp.zkaleejoo.config;
 
-import clp.zkaleejoo.ClearLagPlus;
+import clp.zkaleejoo.MaxClear;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -9,14 +9,14 @@ import java.io.File;
 import java.io.IOException;
 
 public class CustomConfig {
-    private ClearLagPlus plugin;
+    private MaxClear plugin;
     private String fileName;
     private FileConfiguration fileConfiguration = null;
     private File file = null;
     private String folderName;
     private boolean newFile;
 
-    public CustomConfig(String fileName, String folderName, ClearLagPlus plugin, boolean newFile) {
+    public CustomConfig(String fileName, String folderName, MaxClear plugin, boolean newFile) {
     this.fileName = fileName;
     this.folderName = folderName;
     this.plugin = plugin;

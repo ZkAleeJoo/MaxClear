@@ -1,5 +1,5 @@
 general:
-  prefix: "&8[&fClearLag&e+&8] " # IT IS RECOMMENDED TO LEAVE A SPACE AFTER THE PREFIX :)
+  prefix: "&e&lMaxClear &8» " # IT IS RECOMMENDED TO LEAVE A SPACE AFTER THE PREFIX :)
   update-check: true
 # Time in seconds between each automatic clear
 auto-clear:
@@ -17,23 +17,20 @@ messages:
     enabled: true
     seconds-before: 10  # Warn 10 seconds before
     message: "&fEntities will be removed in &c{time} &fseconds. &7Pick up your important items."
-
   # Message when the clear is completed
   completed:
     message:
       - "&fClear completed. &a{count} &fentities were removed from the server."
-      - "&7Thanks for using &eClearLagPlus&7."
-
+      - "&7Thanks for using &eMaxClear&7."
   # Message when a manual clear is executed
   manual-clear:
     message: "&fManual clear executed by &a{player}&f. &a{count} &fentities were removed."
-
   no-permission: "&cYou don't have permission to use this command."
   plugin-reload: "&aConfiguration successfully reloaded."
   message-console: "&cThis command cannot be executed from the console."
-  subcommand-invalid: "&cInvalid subcommand. Use /clearlagplus help to see the available commands."
-  subcommand-specified: "&cPlease specify a subcommand. Use /clearlagplus help to see the available commands."
-  update-available: "&eA new version of ClearLag is available! (&b{version}&e)"
+  subcommand-invalid: "&cInvalid subcommand. Use /maxclear help to see the available commands."
+  subcommand-specified: "&cPlease specify a subcommand. Use /maxclear help to see the available commands."
+  update-available: "&eA new version of MaxClear is available! (&b{version}&e)"
 
 # Entity removal configuration
 entities:

@@ -1,6 +1,6 @@
 package clp.zkaleejoo.utils;
 
-import clp.zkaleejoo.ClearLagPlus;
+import clp.zkaleejoo.MaxClear;
 import clp.zkaleejoo.config.MainConfigManager;
 import org.bukkit.*;
 import org.bukkit.command.CommandSender;
@@ -14,7 +14,7 @@ public class EntityClearer {
 
     private final MainConfigManager config;
 
-    public EntityClearer(ClearLagPlus plugin) {
+    public EntityClearer(MaxClear plugin) {
         this.config = plugin.getMainConfigManager();
     }
 

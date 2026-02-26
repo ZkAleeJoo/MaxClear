@@ -1,6 +1,6 @@
 package clp.zkaleejoo.listeners;
 
-import clp.zkaleejoo.ClearLagPlus;
+import clp.zkaleejoo.MaxClear;
 import org.bukkit.Chunk;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -12,9 +12,9 @@ import java.util.Arrays;
 
 public class EntityListener implements Listener {
 
-    private final ClearLagPlus plugin;
+    private final MaxClear plugin;
 
-    public EntityListener(ClearLagPlus plugin) {
+    public EntityListener(MaxClear plugin) {
         this.plugin = plugin;
     }
 

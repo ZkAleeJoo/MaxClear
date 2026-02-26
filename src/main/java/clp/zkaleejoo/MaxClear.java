@@ -11,13 +11,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class ClearLagPlus extends JavaPlugin {
+public class MaxClear extends JavaPlugin {
 
-    public static String prefix = "&8[&aClearLag&e+&8] ";
+    public static String prefix = "&e&lMaxClear &8» ";
     private MainConfigManager mainConfigManager;
     private TaskManager taskManager;
     private String latestVersion;
 
+    //PLUGIN ENCIENDE
     @Override
     public void onEnable() {
         int pluginId = 28645;
@@ -30,12 +31,12 @@ public class ClearLagPlus extends JavaPlugin {
         taskManager = new TaskManager(this);
         taskManager.startTasks();
 
-        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW+"_________ .__                      .____                  __________.__                ");
-        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW+"\\_   ___ \\|  |   ____ _____ _______|    |   _____     ____\\______   \\  |  __ __  ______");
-        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW+"/    \\  \\/|  | _/ __ \\\\__  \\\\_  __ \\    |   \\__  \\   / ___\\|     ___/  | |  |  \\/  ___/");
-        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW+"\\     \\___|  |_\\  ___/ / __ \\|  | \\/    |___ / __ \\_/ /_/  >    |   |  |_|  |  /\\___ \\ ");
-        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW+" \\______  /____/\\___  >____  /__|  |_______ (____  /\\___  /|____|   |____/____//____  >");
-        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW+"        \\/          \\/     \\/              \\/    \\//_____/                          \\/ ");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW+"   _____                _________ .__                       ");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW+"  /     \\ _____  ___  __\\_   ___ \\|  |   ____ _____ _______ ");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW+" /  \\ /  \\\\__  \\ \\  \\/  /    \\  \\/|  | _/ __ \\\\__  \\\\_  __ \\");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW+"/    Y    \\/ __ \\_>    <\\     \\___|  |_\\  ___/ / __ \\|  | \\/");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW+"\\____|__  (____  /__/\\_ \\\\______  /____/\\___  >____  /__|   ");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW+"        \\/     \\/      \\/       \\/          \\/     \\/       ");
 
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + "&eIt was activated correctly in the version"));
     }

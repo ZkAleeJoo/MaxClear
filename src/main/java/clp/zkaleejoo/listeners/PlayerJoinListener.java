@@ -1,6 +1,6 @@
 package clp.zkaleejoo.listeners;
 
-import clp.zkaleejoo.ClearLagPlus;
+import clp.zkaleejoo.MaxClear;
 import clp.zkaleejoo.config.MainConfigManager;
 import clp.zkaleejoo.utils.MessageUtils;
 import org.bukkit.entity.Player;
@@ -9,16 +9,16 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerJoinListener implements Listener {
-    private final ClearLagPlus plugin;
+    private final MaxClear plugin;
 
-    public PlayerJoinListener(ClearLagPlus plugin) {
+    public PlayerJoinListener(MaxClear plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        if (!player.hasPermission("clearlagplus.admin")) return;
+        if (!player.hasPermission("maxclear.admin")) return;
 
         String latest = plugin.getLatestVersion();
         MainConfigManager config = plugin.getMainConfigManager();
