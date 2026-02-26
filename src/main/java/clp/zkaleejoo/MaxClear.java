@@ -24,7 +24,7 @@ public class MaxClear extends JavaPlugin {
         int pluginId = 28645;
         Metrics metrics = new Metrics(this, pluginId); 
         
-        regsterCommands();
+        registerCommands();
         registerEvents();
         mainConfigManager = new MainConfigManager(this);
         checkUpdates();
@@ -43,15 +43,23 @@ public class MaxClear extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        taskManager.stopTasks();
+        if (taskManager != null) {
+            taskManager.stopTasks();
+        }
         Bukkit.getConsoleSender().sendMessage(
                 ChatColor.translateAlternateColorCodes('&', prefix + "&eIt was successfully deactivated"));
     }
 
-    public void regsterCommands() {
+    public void registerCommands() {
         MainCommand mainCommand = new MainCommand(this);
-        this.getCommand("clearlagplus").setExecutor(new MainCommand(this));
-        this.getCommand("clearlagplus").setTabCompleter(mainCommand);
+        if (this.getCommand("maxclear") == null) {
+            getLogger().severe("Command 'maxclear' is not defined in plugin.yml. Disabling plugin to prevent startup errors.");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
+
+        this.getCommand("maxclear").setExecutor(mainCommand);
+        this.getCommand("maxclear").setTabCompleter(mainCommand);
     }
 
     public void registerEvents() {
