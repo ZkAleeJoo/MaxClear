@@ -11,7 +11,7 @@ import java.util.function.Consumer;
 
 public class UpdateChecker {
     private final MaxClear plugin;
-    private final String slug = "clearlag+"; 
+    private final String slug = "maxclear"; 
 
     public UpdateChecker(MaxClear plugin) {
         this.plugin = plugin;
@@ -22,7 +22,7 @@ public class UpdateChecker {
             try {
                 URL url = URI.create("https://api.modrinth.com/v2/project/" + slug + "/version").toURL();
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestProperty("User-Agent", "ClearLagPlus/UpdateChecker/" + plugin.getDescription().getVersion());
+                connection.setRequestProperty("User-Agent", "MaxClear/UpdateChecker/" + plugin.getDescription().getVersion());
                 
                 try (Scanner scanner = new Scanner(new InputStreamReader(connection.getInputStream()))) {
                     StringBuilder response = new StringBuilder();

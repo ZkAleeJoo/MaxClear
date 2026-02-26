@@ -83,7 +83,7 @@ public class MaxClear extends JavaPlugin {
             } else {
                 this.latestVersion = version;
                 getLogger().warning("A new version is available: " + version);
-                getLogger().warning("Download it at: https://modrinth.com/plugin/clearlag+"); 
+                getLogger().warning("Download it at: https://modrinth.com/plugin/maxclear"); 
             }
         });
     }
