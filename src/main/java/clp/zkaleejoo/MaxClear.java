@@ -4,6 +4,7 @@ import clp.zkaleejoo.commands.MainCommand;
 import clp.zkaleejoo.config.MainConfigManager;
 import clp.zkaleejoo.listeners.EntityListener;
 import clp.zkaleejoo.managers.TaskManager;
+import clp.zkaleejoo.utils.MessageUtils;
 import clp.zkaleejoo.utils.UpdateChecker;
 
 import org.bstats.bukkit.Metrics;
@@ -75,19 +76,28 @@ public class MaxClear extends JavaPlugin {
     }
 
     private void checkUpdates() {
-    if (!getMainConfigManager().isUpdateCheckEnabled()) return;
-
-        new UpdateChecker(this).getVersion(version -> { 
+        new UpdateChecker(this).getVersion(version -> {
             if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
                 getLogger().info("You are using the latest version!");
             } else {
                 this.latestVersion = version;
-                getLogger().warning("A new version is available: " + version);
-                getLogger().warning("Download it at: https://modrinth.com/plugin/maxclear"); 
+
+                Bukkit.getConsoleSender()
+                        .sendMessage(MessageUtils.getColoredMessage("&e&lMaxClear &8» &a&lUPDATE AVAILABLE!"));
+                Bukkit.getConsoleSender().sendMessage(MessageUtils
+                        .getColoredMessage("&e&lMaxClear &8» &7A new version of the plugin has been detected."));
+                Bukkit.getConsoleSender().sendMessage(
+                        MessageUtils.getColoredMessage("&e&lMaxClear &8» &7Available version: &a" + version));
+                Bukkit.getConsoleSender().sendMessage(
+                        MessageUtils.getColoredMessage("&e&lMaxClear &8» &eDownload it now at the following link:"));
+                Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(
+                        "&e&lMaxClear &8» &a&nhttps://modrinth.com/plugin/maxclear"));
             }
         });
     }
 
+    public String getLatestVersion() {
+        return latestVersion;
+    }
 
-    public String getLatestVersion() { return latestVersion; }
 }
