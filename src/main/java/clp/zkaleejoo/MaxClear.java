@@ -7,7 +7,6 @@ import clp.zkaleejoo.managers.TaskManager;
 import clp.zkaleejoo.utils.MessageUtils;
 import clp.zkaleejoo.utils.UpdateChecker;
 
-import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -21,9 +20,6 @@ public class MaxClear extends JavaPlugin {
     // PLUGIN ENCIENDE
     @Override
     public void onEnable() {
-        int pluginId = 28645;
-        Metrics metrics = new Metrics(this, pluginId);
-
         registerCommands();
         registerEvents();
         mainConfigManager = new MainConfigManager(this);
