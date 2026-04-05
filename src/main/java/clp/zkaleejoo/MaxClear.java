@@ -15,7 +15,6 @@ public class MaxClear extends JavaPlugin {
     public static String prefix = "&e&lMaxClear &8» ";
     private MainConfigManager mainConfigManager;
     private TaskManager taskManager;
-    private String latestVersion;
 
     // PLUGIN ENCIENDE
     @Override
@@ -75,7 +74,6 @@ public class MaxClear extends JavaPlugin {
             if (this.getPluginMeta().getVersion().equalsIgnoreCase(version)) {
                 getLogger().info("You are using the latest version!");
             } else {
-                this.latestVersion = version;
 
                 Bukkit.getConsoleSender()
                         .sendMessage(MessageUtils.getColoredMessage("&e&lMaxClear &8» &a&lUPDATE AVAILABLE!"));
@@ -91,8 +89,5 @@ public class MaxClear extends JavaPlugin {
         });
     }
 
-    public String getLatestVersion() {
-        return latestVersion;
-    }
 
 }
