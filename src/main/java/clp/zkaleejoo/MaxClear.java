@@ -9,7 +9,6 @@ import clp.zkaleejoo.utils.UpdateChecker;
 
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class MaxClear extends JavaPlugin {
@@ -19,12 +18,12 @@ public class MaxClear extends JavaPlugin {
     private TaskManager taskManager;
     private String latestVersion;
 
-    //PLUGIN ENCIENDE
+    // PLUGIN ENCIENDE
     @Override
     public void onEnable() {
         int pluginId = 28645;
-        Metrics metrics = new Metrics(this, pluginId); 
-        
+        Metrics metrics = new Metrics(this, pluginId);
+
         registerCommands();
         registerEvents();
         mainConfigManager = new MainConfigManager(this);
@@ -32,14 +31,21 @@ public class MaxClear extends JavaPlugin {
         taskManager = new TaskManager(this);
         taskManager.startTasks();
 
-        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW+"   _____                _________ .__                       ");
-        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW+"  /     \\ _____  ___  __\\_   ___ \\|  |   ____ _____ _______ ");
-        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW+" /  \\ /  \\\\__  \\ \\  \\/  /    \\  \\/|  | _/ __ \\\\__  \\\\_  __ \\");
-        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW+"/    Y    \\/ __ \\_>    <\\     \\___|  |_\\  ___/ / __ \\|  | \\/");
-        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW+"\\____|__  (____  /__/\\_ \\\\______  /____/\\___  >____  /__|   ");
-        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW+"        \\/     \\/      \\/       \\/          \\/     \\/       ");
+        Bukkit.getConsoleSender().sendMessage(
+                MessageUtils.getColoredMessage("   _____                _________ .__                       "));
+        Bukkit.getConsoleSender().sendMessage(MessageUtils
+                .getColoredMessage("  /     \\\\ _____  ___  __\\\\_   ___ \\\\|  |   ____ _____ _______ "));
+        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(
+                " /  \\\\ /  \\\\\\\\__  \\\\ \\\\  \\\\/  /    \\\\  \\\\/|  | _/ __ \\\\\\\\__  \\\\\\\\_  __ \\\\\""));
+        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(
+                "/    Y    \\\\/ __ \\\\_>    <\\\\     \\\\___|  |_\\\\  ___/ / __ \\\\|  | \\\\/"));
+        Bukkit.getConsoleSender().sendMessage(MessageUtils
+                .getColoredMessage("\\\\____|__  (____  /__/\\\\_ \\\\\\\\______  /____/\\\\___  >____  /__|   "));
+        Bukkit.getConsoleSender().sendMessage(MessageUtils
+                .getColoredMessage("        \\\\/     \\\\/      \\\\/       \\\\/          \\\\/     \\\\/       "));
 
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + "&eIt was activated correctly in the version"));
+        Bukkit.getConsoleSender()
+                .sendMessage(MessageUtils.getColoredMessage(prefix + "&eIt was activated correctly in the version"));
     }
 
     @Override
@@ -47,14 +53,15 @@ public class MaxClear extends JavaPlugin {
         if (taskManager != null) {
             taskManager.stopTasks();
         }
-        Bukkit.getConsoleSender().sendMessage(
-                ChatColor.translateAlternateColorCodes('&', prefix + "&eIt was successfully deactivated"));
+        Bukkit.getConsoleSender()
+                .sendMessage(MessageUtils.getColoredMessage(prefix + "&eIt was successfully deactivated"));
     }
 
     public void registerCommands() {
         MainCommand mainCommand = new MainCommand(this);
         if (this.getCommand("maxclear") == null) {
-            getLogger().severe("Command 'maxclear' is not defined in plugin.yml. Disabling plugin to prevent startup errors.");
+            getLogger().severe(
+                    "Command 'maxclear' is not defined in plugin.yml. Disabling plugin to prevent startup errors.");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
@@ -77,7 +84,7 @@ public class MaxClear extends JavaPlugin {
 
     private void checkUpdates() {
         new UpdateChecker(this).getVersion(version -> {
-            if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
+            if (this.getPluginMeta().getVersion().equalsIgnoreCase(version)) {
                 getLogger().info("You are using the latest version!");
             } else {
                 this.latestVersion = version;
