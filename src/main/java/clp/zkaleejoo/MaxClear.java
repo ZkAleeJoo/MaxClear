@@ -31,21 +31,13 @@ public class MaxClear extends JavaPlugin {
         taskManager = new TaskManager(this);
         taskManager.startTasks();
 
-        Bukkit.getConsoleSender().sendMessage(
-                MessageUtils.getColoredMessage("   _____                _________ .__                       "));
-        Bukkit.getConsoleSender().sendMessage(MessageUtils
-                .getColoredMessage("  /     \\\\ _____  ___  __\\\\_   ___ \\\\|  |   ____ _____ _______ "));
-        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(
-                " /  \\\\ /  \\\\\\\\__  \\\\ \\\\  \\\\/  /    \\\\  \\\\/|  | _/ __ \\\\\\\\__  \\\\\\\\_  __ \\\\\""));
-        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(
-                "/    Y    \\\\/ __ \\\\_>    <\\\\     \\\\___|  |_\\\\  ___/ / __ \\\\|  | \\\\/"));
-        Bukkit.getConsoleSender().sendMessage(MessageUtils
-                .getColoredMessage("\\\\____|__  (____  /__/\\\\_ \\\\\\\\______  /____/\\\\___  >____  /__|   "));
-        Bukkit.getConsoleSender().sendMessage(MessageUtils
-                .getColoredMessage("        \\\\/     \\\\/      \\\\/       \\\\/          \\\\/     \\\\/       "));
-
-        Bukkit.getConsoleSender()
-                .sendMessage(MessageUtils.getColoredMessage(prefix + "&eIt was activated correctly in the version"));
+        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(prefix + "&e   _____      _____  ____  ____________ .____     ___________   _____ __________ "));
+        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(prefix + "&e  /     \\    /  _  \\ \\   \\/  /\\_   ___ \\|    |    \\_   _____/  /  _  \\\\______   \\"));
+        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(prefix + "&e /  \\ /  \\  /  /_\\  \\ \\     / /    \\  \\/|    |     |    __)_  /  /_\\  \\|       _/"));
+        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(prefix + "&e/    Y    \\/    |    \\/     \\ \\     \\___|    |___  |        \\/    |    \\    |   \\"));
+        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(prefix + "&e\\____|__  /\\____|__  /___/\\  \\ \\______  /_______ \\/_______  /\\____|__  /____|_  /"));
+        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(prefix + "&e        \\/         \\/      \\_/        \\/        \\/        \\/         \\/       \\/ "));
+        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(prefix + "&eIt was activated correctly in the version"));
     }
 
     @Override
