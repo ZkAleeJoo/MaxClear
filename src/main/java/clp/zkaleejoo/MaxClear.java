@@ -15,12 +15,14 @@ public class MaxClear extends JavaPlugin {
     public static String prefix = "&e&lMaxClear &8» ";
     private MainConfigManager mainConfigManager;
     private TaskManager taskManager;
+    private String latestVersion;
 
     // PLUGIN ENCIENDE
     @Override
     public void onEnable() {
         registerCommands();
         registerEvents();
+        mainConfigManager = new MainConfigManager(this);
         checkUpdates();
         taskManager = new TaskManager(this);
         taskManager.startTasks();
@@ -31,7 +33,7 @@ public class MaxClear extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(prefix + "&e/    Y    \\/    |    \\/     \\ \\     \\___|    |___  |        \\/    |    \\    |   \\"));
         Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(prefix + "&e\\____|__  /\\____|__  /___/\\  \\ \\______  /_______ \\/_______  /\\____|__  /____|_  /"));
         Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(prefix + "&e        \\/         \\/      \\_/        \\/        \\/        \\/         \\/       \\/ "));
-        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(prefix + "&eIt was activated correctly in the version &a"+ getPluginMeta().getVersion()));
+        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(prefix + "&eIt was activated correctly in the version"));
     }
 
     @Override
@@ -73,6 +75,7 @@ public class MaxClear extends JavaPlugin {
             if (this.getPluginMeta().getVersion().equalsIgnoreCase(version)) {
                 getLogger().info("You are using the latest version!");
             } else {
+                this.latestVersion = version;
 
                 Bukkit.getConsoleSender()
                         .sendMessage(MessageUtils.getColoredMessage("&e&lMaxClear &8» &a&lUPDATE AVAILABLE!"));
@@ -86,6 +89,10 @@ public class MaxClear extends JavaPlugin {
                         "&e&lMaxClear &8» &a&nhttps://modrinth.com/plugin/maxclear"));
             }
         });
+    }
+
+    public String getLatestVersion() {
+        return latestVersion;
     }
 
 }

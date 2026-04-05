@@ -29,6 +29,8 @@ public class MainConfigManager {
     private String subcommandSpecified;
     private Boolean chunkLimitEnabled;
     private Integer chunkLimitMax;
+    private boolean updateCheckEnabled;
+    private String msgUpdateAvailable;
 
     public MainConfigManager(MaxClear plugin){
         configFile = new CustomConfig("config.yml", null, plugin, false);
@@ -59,6 +61,8 @@ public class MainConfigManager {
 
         chunkLimitEnabled = config.getBoolean("chunk-limit.enabled");
         chunkLimitMax = config.getInt("chunk-limit.max");
+        updateCheckEnabled = config.getBoolean("general.update-check", true);
+        msgUpdateAvailable = config.getString("messages.update-available");
     }
 
     public void reloadConfig(){
@@ -86,4 +90,6 @@ public class MainConfigManager {
     public String getSubcommandSpecified() { return subcommandSpecified; }
     public Boolean isChunkLimitEnabled() { return chunkLimitEnabled; }
     public Integer getChunkLimitMax() { return chunkLimitMax; }
+    public boolean isUpdateCheckEnabled() { return updateCheckEnabled; }
+    public String getMsgUpdateAvailable() { return msgUpdateAvailable; }
 }
