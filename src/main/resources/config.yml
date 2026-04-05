@@ -1,6 +1,5 @@
 general:
   prefix: "&e&lMaxClear &8» " # IT IS RECOMMENDED TO LEAVE A SPACE AFTER THE PREFIX :)
-  update-check: true
 # Time in seconds between each automatic clear
 auto-clear:
   enabled: true
@@ -30,7 +29,6 @@ messages:
   message-console: "&cThis command cannot be executed from the console."
   subcommand-invalid: "&cInvalid subcommand. Use /maxclear help to see the available commands."
   subcommand-specified: "&cPlease specify a subcommand. Use /maxclear help to see the available commands."
-  update-available: "&eA new version of MaxClear is available! (&b{version}&e)"
 
 # Entity removal configuration
 entities:
