@@ -22,3 +22,11 @@ MaxClear es un plugin simple de limpieza, cada cierto tiempo se ejecuta una limp
   - Configurable warning announcements before a clear happens to give players time to pick up their items.
 - **Built-in Update Checker**
   - Automatically notifies server administrators on join when a new update is available.
+
+## BUILD (Gradle)
+Requisitos: **JDK 17** o superior.
+
+- Windows: `./gradlew.bat build`
+- Linux/macOS: `./gradlew build`
+
+El JAR se genera en `build/libs/`.
