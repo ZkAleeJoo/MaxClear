@@ -1,7 +1,5 @@
 .idea/
 .vscode/
-.gradle/
-build/
 server-data/
 server-plugins/
 target/
