@@ -6,7 +6,7 @@
 
     <groupId>clp.zkaleejoo</groupId>
     <artifactId>MaxClear</artifactId>
-    <version>3.0.2</version>
+    <version>3.0.3</version>
 
     <properties>
         <java.version>21</java.version>
