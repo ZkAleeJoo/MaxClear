@@ -65,9 +65,9 @@ public class MainConfigManager {
         subcommandSpecified = config.getString("messages.subcommand-specified");
 
         chunkLimitEnabled = config.getBoolean("chunk-limit.enabled");
-        chunkLimitMax = config.getInt("chunk-limit.max");
-        updateCheckEnabled = config.getBoolean("general.update-check");
-        bStatsEnabled = config.getBoolean("general.bstats");
+        chunkLimitMax = config.getInt("chunk-limit.max", 50);
+        updateCheckEnabled = config.getBoolean("general.update-check", true);
+        bStatsEnabled = config.getBoolean("general.bstats", true);
     }
 
     public void reloadConfig() {
