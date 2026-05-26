@@ -25,10 +25,9 @@ public class MainCommand implements CommandExecutor, TabCompleter {
 
         if (!(sender instanceof Player)) {
             if (args.length >= 1 && args[0].equalsIgnoreCase("reload")) {
+                plugin.reloadPluginState();
                 sender.sendMessage(MessageUtils.getColoredMessage(
                         plugin.getMainConfigManager().getPrefix() + plugin.getMainConfigManager().getPluginReload()));
-                plugin.getMainConfigManager().reloadConfig();
-                plugin.getTaskManager().reloadTasks();
                 return true;
 
             } else if (args.length >= 1 && args[0].equalsIgnoreCase("clear")) {
@@ -55,10 +54,9 @@ public class MainCommand implements CommandExecutor, TabCompleter {
 
         if (args.length >= 1) {
             if (args[0].equalsIgnoreCase("reload")) {
+                plugin.reloadPluginState();
                 sender.sendMessage(MessageUtils.getColoredMessage(
                         plugin.getMainConfigManager().getPrefix() + plugin.getMainConfigManager().getPluginReload()));
-                plugin.getMainConfigManager().reloadConfig();
-                plugin.getTaskManager().reloadTasks();
 
             } else if (args[0].equalsIgnoreCase("get")) {
                 subcommandGet(sender, args);

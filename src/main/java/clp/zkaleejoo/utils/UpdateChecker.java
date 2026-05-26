@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.function.Consumer;
 
 public class UpdateChecker {
@@ -21,9 +22,10 @@ public class UpdateChecker {
 
     public void getVersion(final Consumer<String> consumer) {
         Bukkit.getScheduler().runTaskAsynchronously(this.plugin, () -> {
+            HttpURLConnection connection = null;
             try {
                 URL url = URI.create(GITHUB_VERSION_URL).toURL();
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection = (HttpURLConnection) url.openConnection();
 
                 connection.setRequestMethod("GET");
                 connection.setRequestProperty("User-Agent", "MaxClear-UpdateChecker");
@@ -36,17 +38,24 @@ public class UpdateChecker {
                     return;
                 }
 
-                try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                try (BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
                     String latestVersion = reader.readLine();
                     if (latestVersion != null && !latestVersion.isBlank()) {
                         String trimmedVersion = latestVersion.trim();
-                        Bukkit.getScheduler().runTask(plugin, () -> consumer.accept(trimmedVersion));
+                        if (plugin.isEnabled()) {
+                            Bukkit.getScheduler().runTask(plugin, () -> consumer.accept(trimmedVersion));
+                        }
                     } else {
                         plugin.getLogger().info("The version is empty.");
                     }
                 }
             } catch (Exception exception) {
                 plugin.getLogger().info("Could not connect to check for updates: " + exception.getMessage());
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
             }
         });
     }

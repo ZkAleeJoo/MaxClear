@@ -54,6 +54,16 @@ public class MaxClear extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        if (updateCheckTask != null) {
+            updateCheckTask.cancel();
+            updateCheckTask = null;
+        }
+
+        if (metrics != null) {
+            metrics.shutdown();
+            metrics = null;
+        }
+
         if (taskManager != null) {
             taskManager.stopTasks();
         }
@@ -85,6 +95,16 @@ public class MaxClear extends JavaPlugin {
 
     public TaskManager getTaskManager() {
         return taskManager;
+    }
+
+    public void reloadPluginState() {
+        mainConfigManager.reloadConfig();
+        syncMetricsState();
+        startUpdateChecks();
+
+        if (taskManager != null) {
+            taskManager.reloadTasks();
+        }
     }
 
     private void startUpdateChecks() {

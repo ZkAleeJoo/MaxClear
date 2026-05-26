@@ -1,6 +1,8 @@
 general:
   prefix: "&e&lMaxClear &8» " # IT IS RECOMMENDED TO LEAVE A SPACE AFTER THE PREFIX :)
+  # Check for updates on startup and every 5 hours.
   update-check: true
+  # Send anonymous usage metrics to bStats.
   bstats: true
 # Time in seconds between each automatic clear
 auto-clear:

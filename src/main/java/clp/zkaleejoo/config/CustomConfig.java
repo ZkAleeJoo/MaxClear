@@ -7,6 +7,10 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 public class CustomConfig {
     private MaxClear plugin;
@@ -27,10 +31,13 @@ public class CustomConfig {
         return this.fileName;
     }
 
-    @SuppressWarnings("null")
     public void registerConfig() {
         if (folderName != null) {
-            file = new File(plugin.getDataFolder() + File.separator + folderName, fileName);
+            File folder = new File(plugin.getDataFolder(), folderName);
+            if (!folder.exists()) {
+                folder.mkdirs();
+            }
+            file = new File(folder, fileName);
         } else {
             file = new File(plugin.getDataFolder(), fileName);
         }
@@ -44,9 +51,9 @@ public class CustomConfig {
                 }
             } else {
                 if (folderName != null) {
-                    plugin.saveResource(folderName + File.separator + fileName, false);
+                    plugin.saveResource(folderName + "/" + fileName, false);
                 } else {
-                    plugin.saveResource(fileName, false);
+                    plugin.saveResource(Objects.requireNonNull(fileName), false);
                 }
             }
 
@@ -55,11 +62,40 @@ public class CustomConfig {
         fileConfiguration = new YamlConfiguration();
         try {
             fileConfiguration.load(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InvalidConfigurationException e) {
+            if (!newFile) {
+                updateConfig();
+            }
+        } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
+    }
+
+    public void updateConfig() {
+        try (InputStream resourceStream = plugin.getResource(Objects.requireNonNull(getResourcePath()))) {
+            if (resourceStream == null) {
+                return;
+            }
+
+            YamlConfiguration bundledConfig = YamlConfiguration.loadConfiguration(
+                    new InputStreamReader(resourceStream, StandardCharsets.UTF_8));
+
+            if (copyMissingDefaults(fileConfiguration, bundledConfig)) {
+                saveConfig();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static boolean copyMissingDefaults(FileConfiguration fileConfiguration, FileConfiguration bundledConfig) {
+        boolean changed = false;
+        for (String key : bundledConfig.getKeys(true)) {
+            if (!fileConfiguration.contains(key)) {
+                fileConfiguration.set(key, bundledConfig.get(key));
+                changed = true;
+            }
+        }
+        return changed;
     }
 
     public void saveConfig() {
@@ -78,20 +114,29 @@ public class CustomConfig {
     }
 
     public boolean reloadConfig() {
-        if (fileConfiguration == null) {
-            if (folderName != null) {
-                file = new File(plugin.getDataFolder() + File.separator + folderName, fileName);
-            } else {
-                file = new File(plugin.getDataFolder(), fileName);
-            }
-
+        if (folderName != null) {
+            file = new File(plugin.getDataFolder() + File.separator + folderName, fileName);
+        } else {
+            file = new File(plugin.getDataFolder(), fileName);
         }
+
         fileConfiguration = YamlConfiguration.loadConfiguration(file);
 
-        if (file != null) {
-            YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(file);
+        try (InputStream resourceStream = plugin.getResource(Objects.requireNonNull(getResourcePath()))) {
+            if (resourceStream == null) {
+                return true;
+            }
+
+            YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(
+                    new InputStreamReader(resourceStream, StandardCharsets.UTF_8));
             fileConfiguration.setDefaults(defConfig);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return true;
+    }
+
+    private String getResourcePath() {
+        return (folderName != null) ? folderName + "/" + fileName : fileName;
     }
 }
