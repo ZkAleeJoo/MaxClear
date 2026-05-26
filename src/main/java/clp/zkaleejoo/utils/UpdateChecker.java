@@ -24,7 +24,7 @@ public class UpdateChecker {
             try {
                 URL url = URI.create(GITHUB_VERSION_URL).toURL();
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                
+
                 connection.setRequestMethod("GET");
                 connection.setRequestProperty("User-Agent", "MaxClear-UpdateChecker");
                 connection.setConnectTimeout(5000);

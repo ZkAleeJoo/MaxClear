@@ -7,7 +7,9 @@ import clp.zkaleejoo.managers.TaskManager;
 import clp.zkaleejoo.utils.MessageUtils;
 import clp.zkaleejoo.utils.UpdateChecker;
 
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class MaxClear extends JavaPlugin {
@@ -15,11 +17,14 @@ public class MaxClear extends JavaPlugin {
     public static String prefix = "&e&lMaxClear &8» ";
     private MainConfigManager mainConfigManager;
     private TaskManager taskManager;
+    private static final int BSTATS_PLUGIN_ID = 31581;
+    private Metrics metrics;
 
     // PLUGIN ENCIENDE
     @Override
     public void onEnable() {
         registerCommands();
+        syncMetricsState();
         registerEvents();
         mainConfigManager = new MainConfigManager(this);
         checkUpdates();
@@ -53,15 +58,16 @@ public class MaxClear extends JavaPlugin {
 
     public void registerCommands() {
         MainCommand mainCommand = new MainCommand(this);
-        if (this.getCommand("maxclear") == null) {
+        PluginCommand command = this.getCommand("maxclear");
+        if (command == null) {
             getLogger().severe(
                     "Command 'maxclear' is not defined in plugin.yml. Disabling plugin to prevent startup errors.");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
 
-        this.getCommand("maxclear").setExecutor(mainCommand);
-        this.getCommand("maxclear").setTabCompleter(mainCommand);
+        command.setExecutor(mainCommand);
+        command.setTabCompleter(mainCommand);
     }
 
     public void registerEvents() {
@@ -83,12 +89,26 @@ public class MaxClear extends JavaPlugin {
             } else {
 
                 Bukkit.getConsoleSender()
-                        .sendMessage(MessageUtils.getColoredMessage("&e&lMaxClear &8» &f&lNEW VERSION &7:" + version));
+                        .sendMessage(MessageUtils.getColoredMessage("&e&lMaxClear &8» &f&lNEW VERSION: &7" + version));
                 Bukkit.getConsoleSender().sendMessage(
                         MessageUtils.getColoredMessage(
                                 "&e&lMaxClear &8» &fDownload it now at the following link: &7https://modrinth.com/plugin/maxclear"));
             }
         });
+    }
+
+    private void syncMetricsState() {
+        if (getMainConfigManager().isBStatsEnabled()) {
+            if (metrics == null) {
+                metrics = new Metrics(this, BSTATS_PLUGIN_ID);
+            }
+            return;
+        }
+
+        if (metrics != null) {
+            metrics.shutdown();
+            metrics = null;
+        }
     }
 
 }

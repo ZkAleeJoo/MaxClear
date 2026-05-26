@@ -21,7 +21,8 @@ public class EntityClearer {
     public int clearEntities(boolean isManual, CommandSender sender) {
         int removedCount = 0;
         for (World world : Bukkit.getWorlds()) {
-            if (!shouldProcessWorld(world)) continue;
+            if (!shouldProcessWorld(world))
+                continue;
 
             for (Entity entity : world.getEntities()) {
                 if (shouldRemoveEntity(entity)) {
@@ -38,7 +39,8 @@ public class EntityClearer {
             MessageUtils.broadcastToPlayersOnly(config.getPrefix() + message);
         } else {
             for (String line : config.getCompletedMessage()) {
-                MessageUtils.broadcastToPlayersOnly(config.getPrefix() + line.replace("{count}", String.valueOf(removedCount)));
+                MessageUtils.broadcastToPlayersOnly(
+                        config.getPrefix() + line.replace("{count}", String.valueOf(removedCount)));
             }
         }
 
@@ -64,14 +66,14 @@ public class EntityClearer {
             ItemStack itemStack = item.getItemStack();
             if (itemStack.hasItemMeta()) {
                 ItemMeta meta = itemStack.getItemMeta();
-                if (meta.hasDisplayName()) return false;
+                if (meta.hasDisplayName())
+                    return false;
             }
         }
 
         if (config.getEntitiesMinDistanceFromSpawn() > 0) {
             Location spawn = entity.getWorld().getSpawnLocation();
-            if (entity.getLocation().distanceSquared(spawn) <
-                    Math.pow(config.getEntitiesMinDistanceFromSpawn(), 2)) {
+            if (entity.getLocation().distanceSquared(spawn) < Math.pow(config.getEntitiesMinDistanceFromSpawn(), 2)) {
                 return false;
             }
         }

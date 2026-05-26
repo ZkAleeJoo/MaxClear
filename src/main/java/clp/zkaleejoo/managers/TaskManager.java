@@ -27,8 +27,7 @@ public class TaskManager {
                 }
             }.runTaskTimer(plugin,
                     plugin.getMainConfigManager().getAutoClearInterval() * 20L,
-                    plugin.getMainConfigManager().getAutoClearInterval() * 20L
-            ).getTaskId();
+                    plugin.getMainConfigManager().getAutoClearInterval() * 20L).getTaskId();
         }
 
         if (plugin.getMainConfigManager().getWarningEnabled()) {
@@ -43,14 +42,15 @@ public class TaskManager {
                     MessageUtils.broadcastToPlayersOnly(plugin.getMainConfigManager().getPrefix() + message);
                 }
             }.runTaskTimer(plugin, warningDelay,
-                    plugin.getMainConfigManager().getAutoClearInterval() * 20L
-            ).getTaskId();
+                    plugin.getMainConfigManager().getAutoClearInterval() * 20L).getTaskId();
         }
     }
 
     public void stopTasks() {
-        if (taskId != -1) Bukkit.getScheduler().cancelTask(taskId);
-        if (warningTaskId != -1) Bukkit.getScheduler().cancelTask(warningTaskId);
+        if (taskId != -1)
+            Bukkit.getScheduler().cancelTask(taskId);
+        if (warningTaskId != -1)
+            Bukkit.getScheduler().cancelTask(warningTaskId);
     }
 
     public void reloadTasks() {

@@ -1,6 +1,7 @@
 general:
   prefix: "&e&lMaxClear &8» " # IT IS RECOMMENDED TO LEAVE A SPACE AFTER THE PREFIX :)
   update-check: true
+  bstats: true
 # Time in seconds between each automatic clear
 auto-clear:
   enabled: true
