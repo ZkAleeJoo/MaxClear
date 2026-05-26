@@ -16,26 +16,27 @@ public class MainCommand implements CommandExecutor, TabCompleter {
 
     private MaxClear plugin;
 
-    public MainCommand(MaxClear plugin){
+    public MainCommand(MaxClear plugin) {
         this.plugin = plugin;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
 
-        if(!(sender instanceof Player)){
-            if(args.length >= 1 && args[0].equalsIgnoreCase("reload")){
-                sender.sendMessage(MessageUtils.getColoredMessage(plugin.getMainConfigManager().getPrefix() + plugin.getMainConfigManager().getPluginReload()));
+        if (!(sender instanceof Player)) {
+            if (args.length >= 1 && args[0].equalsIgnoreCase("reload")) {
+                sender.sendMessage(MessageUtils.getColoredMessage(
+                        plugin.getMainConfigManager().getPrefix() + plugin.getMainConfigManager().getPluginReload()));
                 plugin.getMainConfigManager().reloadConfig();
                 plugin.getTaskManager().reloadTasks();
                 return true;
 
-            }else if(args.length >= 1 && args[0].equalsIgnoreCase("clear")){
+            } else if (args.length >= 1 && args[0].equalsIgnoreCase("clear")) {
                 EntityClearer clearer = new EntityClearer(plugin);
                 clearer.clearEntities(true, sender);
                 return true;
 
-            }else if(args.length >= 1 && args[0].equalsIgnoreCase("get")){
+            } else if (args.length >= 1 && args[0].equalsIgnoreCase("get")) {
                 subcommandGet(sender, args);
                 return true;
 
@@ -47,20 +48,22 @@ public class MainCommand implements CommandExecutor, TabCompleter {
         Player player = (Player) sender;
 
         if (!player.hasPermission("maxclear.admin")) {
-            player.sendMessage(MessageUtils.getColoredMessage(plugin.getMainConfigManager().getPrefix() + plugin.getMainConfigManager().getNoPermission()));
+            player.sendMessage(MessageUtils.getColoredMessage(
+                    plugin.getMainConfigManager().getPrefix() + plugin.getMainConfigManager().getNoPermission()));
             return true;
         }
 
-        if(args.length >= 1){
-            if(args[0].equalsIgnoreCase("reload")){
-                sender.sendMessage(MessageUtils.getColoredMessage(plugin.getMainConfigManager().getPrefix() + plugin.getMainConfigManager().getPluginReload()));
+        if (args.length >= 1) {
+            if (args[0].equalsIgnoreCase("reload")) {
+                sender.sendMessage(MessageUtils.getColoredMessage(
+                        plugin.getMainConfigManager().getPrefix() + plugin.getMainConfigManager().getPluginReload()));
                 plugin.getMainConfigManager().reloadConfig();
                 plugin.getTaskManager().reloadTasks();
 
-            } else if(args[0].equalsIgnoreCase("get")){
+            } else if (args[0].equalsIgnoreCase("get")) {
                 subcommandGet(sender, args);
 
-            } else if(args[0].equalsIgnoreCase("clear")){
+            } else if (args[0].equalsIgnoreCase("clear")) {
                 EntityClearer clearer = new EntityClearer(plugin);
                 clearer.clearEntities(true, sender);
 
@@ -74,27 +77,34 @@ public class MainCommand implements CommandExecutor, TabCompleter {
         return true;
     }
 
-    public void help(CommandSender sender){
-        sender.sendMessage(MessageUtils.getColoredMessage("&e&lMaxClear &fList of commands: "+ plugin.getDescription().getVersion()));
+    @SuppressWarnings("deprecation")
+    public void help(CommandSender sender) {
+        sender.sendMessage(MessageUtils
+                .getColoredMessage("&e&lMaxClear &fList of commands: " + plugin.getDescription().getVersion()));
         sender.sendMessage(MessageUtils.getColoredMessage("&9> &a/maxclear reload"));
         sender.sendMessage(MessageUtils.getColoredMessage("&9> &a/maxclear clear"));
         sender.sendMessage(MessageUtils.getColoredMessage("&9> &a/maxclear get <author/version>"));
     }
 
-    public void subcommandGet(CommandSender sender, String[] args){
-        if(args.length >= 2){
-            if(args[1].equalsIgnoreCase("author")){
-                sender.sendMessage(MessageUtils.getColoredMessage("&fPlugin made by &a"+plugin.getDescription().getAuthors()));
+    @SuppressWarnings("deprecation")
+    public void subcommandGet(CommandSender sender, String[] args) {
+        if (args.length >= 2) {
+            if (args[1].equalsIgnoreCase("author")) {
+                sender.sendMessage(
+                        MessageUtils.getColoredMessage("&fPlugin made by &a" + plugin.getDescription().getAuthors()));
 
-            } else if(args[1].equalsIgnoreCase("version")){
-                sender.sendMessage(MessageUtils.getColoredMessage("&fCurrent version: &a "+plugin.getDescription().getVersion()));
+            } else if (args[1].equalsIgnoreCase("version")) {
+                sender.sendMessage(MessageUtils
+                        .getColoredMessage("&fCurrent version: &a " + plugin.getDescription().getVersion()));
 
             } else {
-                sender.sendMessage(MessageUtils.getColoredMessage(plugin.getMainConfigManager().getPrefix() + plugin.getMainConfigManager().getSubcommandInvalid()));
+                sender.sendMessage(MessageUtils.getColoredMessage(plugin.getMainConfigManager().getPrefix()
+                        + plugin.getMainConfigManager().getSubcommandInvalid()));
 
             }
         } else {
-            sender.sendMessage(MessageUtils.getColoredMessage(plugin.getMainConfigManager().getPrefix() + plugin.getMainConfigManager().getSubcommandSpecified()));
+            sender.sendMessage(MessageUtils.getColoredMessage(plugin.getMainConfigManager().getPrefix()
+                    + plugin.getMainConfigManager().getSubcommandSpecified()));
 
         }
     }
@@ -102,7 +112,6 @@ public class MainCommand implements CommandExecutor, TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         List<String> completions = new ArrayList<>();
-
 
         if (!sender.hasPermission("maxclear.admin")) {
             return completions;

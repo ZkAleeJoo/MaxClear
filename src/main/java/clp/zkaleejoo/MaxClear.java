@@ -26,13 +26,20 @@ public class MaxClear extends JavaPlugin {
         taskManager = new TaskManager(this);
         taskManager.startTasks();
 
-        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(prefix + "&e   _____      _____  ____  ____________ .____     ___________   _____ __________ "));
-        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(prefix + "&e  /     \\    /  _  \\ \\   \\/  /\\_   ___ \\|    |    \\_   _____/  /  _  \\\\______   \\"));
-        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(prefix + "&e /  \\ /  \\  /  /_\\  \\ \\     / /    \\  \\/|    |     |    __)_  /  /_\\  \\|       _/"));
-        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(prefix + "&e/    Y    \\/    |    \\/     \\ \\     \\___|    |___  |        \\/    |    \\    |   \\"));
-        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(prefix + "&e\\____|__  /\\____|__  /___/\\  \\ \\______  /_______ \\/_______  /\\____|__  /____|_  /"));
-        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(prefix + "&e        \\/         \\/      \\_/        \\/        \\/        \\/         \\/       \\/ "));
-        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(prefix + "&eIt was activated correctly in the version"));
+        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(
+                prefix + "&e   _____      _____  ____  ____________ .____     ___________   _____ __________ "));
+        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(prefix
+                + "&e  /     \\    /  _  \\ \\   \\/  /\\_   ___ \\|    |    \\_   _____/  /  _  \\\\______   \\"));
+        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(prefix
+                + "&e /  \\ /  \\  /  /_\\  \\ \\     / /    \\  \\/|    |     |    __)_  /  /_\\  \\|       _/"));
+        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(prefix
+                + "&e/    Y    \\/    |    \\/     \\ \\     \\___|    |___  |        \\/    |    \\    |   \\"));
+        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(
+                prefix + "&e\\____|__  /\\____|__  /___/\\  \\ \\______  /_______ \\/_______  /\\____|__  /____|_  /"));
+        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(prefix
+                + "&e        \\/         \\/      \\_/        \\/        \\/        \\/         \\/       \\/ "));
+        Bukkit.getConsoleSender()
+                .sendMessage(MessageUtils.getColoredMessage(prefix + "&eIt was activated correctly in the version"));
     }
 
     @Override
@@ -76,18 +83,12 @@ public class MaxClear extends JavaPlugin {
             } else {
 
                 Bukkit.getConsoleSender()
-                        .sendMessage(MessageUtils.getColoredMessage("&e&lMaxClear &8» &a&lUPDATE AVAILABLE!"));
-                Bukkit.getConsoleSender().sendMessage(MessageUtils
-                        .getColoredMessage("&e&lMaxClear &8» &7A new version of the plugin has been detected."));
+                        .sendMessage(MessageUtils.getColoredMessage("&e&lMaxClear &8» &f&lNEW VERSION &7:" + version));
                 Bukkit.getConsoleSender().sendMessage(
-                        MessageUtils.getColoredMessage("&e&lMaxClear &8» &7Available version: &a" + version));
-                Bukkit.getConsoleSender().sendMessage(
-                        MessageUtils.getColoredMessage("&e&lMaxClear &8» &eDownload it now at the following link:"));
-                Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(
-                        "&e&lMaxClear &8» &a&nhttps://modrinth.com/plugin/maxclear"));
+                        MessageUtils.getColoredMessage(
+                                "&e&lMaxClear &8» &fDownload it now at the following link: &7https://modrinth.com/plugin/maxclear"));
             }
         });
     }
-
 
 }
