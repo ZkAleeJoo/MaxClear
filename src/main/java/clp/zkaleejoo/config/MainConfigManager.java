@@ -1,6 +1,7 @@
 package clp.zkaleejoo.config;
 
 import clp.zkaleejoo.MaxClear;
+import clp.zkaleejoo.utils.EntityTypeConfig;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.List;
@@ -19,6 +20,8 @@ public class MainConfigManager {
     private String manualClearMessage;
     private List<String> entitiesTypes;
     private List<String> entitiesExclude;
+    private List<String> resolvedEntitiesTypes;
+    private List<String> resolvedEntitiesExclude;
     private Boolean entitiesIgnoreNamedItems;
     private Integer entitiesMinDistanceFromSpawn;
     private List<String> entitiesWorlds;
@@ -29,6 +32,7 @@ public class MainConfigManager {
     private String subcommandSpecified;
     private Boolean chunkLimitEnabled;
     private Integer chunkLimitMax;
+    private boolean updateCheckEnabled;
     private boolean bStatsEnabled;
 
     public MainConfigManager(MaxClear plugin) {
@@ -49,6 +53,8 @@ public class MainConfigManager {
         manualClearMessage = config.getString("messages.manual-clear.message");
         entitiesTypes = config.getStringList("entities.types");
         entitiesExclude = config.getStringList("entities.exclude");
+        resolvedEntitiesTypes = List.copyOf(EntityTypeConfig.resolveNames(entitiesTypes));
+        resolvedEntitiesExclude = List.copyOf(EntityTypeConfig.resolveNames(entitiesExclude));
         entitiesIgnoreNamedItems = config.getBoolean("entities.settings.ignore-named-items");
         entitiesMinDistanceFromSpawn = config.getInt("entities.settings.min-distance-from-spawn");
         entitiesWorlds = config.getStringList("entities.settings.worlds");
@@ -60,6 +66,7 @@ public class MainConfigManager {
 
         chunkLimitEnabled = config.getBoolean("chunk-limit.enabled");
         chunkLimitMax = config.getInt("chunk-limit.max");
+        updateCheckEnabled = config.getBoolean("general.update-check");
         bStatsEnabled = config.getBoolean("general.bstats");
     }
 
@@ -108,6 +115,14 @@ public class MainConfigManager {
         return entitiesExclude;
     }
 
+    public List<String> getResolvedEntitiesTypes() {
+        return resolvedEntitiesTypes;
+    }
+
+    public List<String> getResolvedEntitiesExclude() {
+        return resolvedEntitiesExclude;
+    }
+
     public Boolean getEntitiesIgnoreNamedItems() {
         return entitiesIgnoreNamedItems;
     }
@@ -150,5 +165,9 @@ public class MainConfigManager {
 
     public Boolean isBStatsEnabled() {
         return bStatsEnabled;
+    }
+
+    public boolean isUpdateCheckEnabled() {
+        return updateCheckEnabled;
     }
 }

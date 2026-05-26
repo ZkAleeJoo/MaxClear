@@ -5,3 +5,4 @@ server-plugins/
 target/
 dependency-reduced-pom.xml
 docker-compose.yml
+test/

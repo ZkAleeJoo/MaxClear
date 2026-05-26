@@ -19,20 +19,27 @@ public class TaskManager {
     }
 
     public void startTasks() {
-        if (plugin.getMainConfigManager().getAutoClearEnabled()) {
+        ClearSchedule schedule = ClearSchedule.from(
+                plugin.getMainConfigManager().getAutoClearEnabled(),
+                plugin.getMainConfigManager().getAutoClearInterval(),
+                plugin.getMainConfigManager().getWarningEnabled(),
+                plugin.getMainConfigManager().getWarningSecondsBefore());
+
+        if (schedule.warningReason() != null) {
+            plugin.getLogger().warning(schedule.warningReason());
+        }
+
+        if (schedule.clearEnabled()) {
             taskId = new BukkitRunnable() {
                 @Override
                 public void run() {
                     entityClearer.clearEntities(false, null);
                 }
-            }.runTaskTimer(plugin,
-                    plugin.getMainConfigManager().getAutoClearInterval() * 20L,
-                    plugin.getMainConfigManager().getAutoClearInterval() * 20L).getTaskId();
+            }.runTaskTimer(plugin, schedule.clearDelayTicks(), schedule.clearDelayTicks()).getTaskId();
         }
 
-        if (plugin.getMainConfigManager().getWarningEnabled()) {
+        if (schedule.warningEnabled()) {
             int warningTime = plugin.getMainConfigManager().getWarningSecondsBefore();
-            long warningDelay = (plugin.getMainConfigManager().getAutoClearInterval() - warningTime) * 20L;
 
             warningTaskId = new BukkitRunnable() {
                 @Override
@@ -41,16 +48,19 @@ public class TaskManager {
                             .replace("{time}", String.valueOf(warningTime));
                     MessageUtils.broadcastToPlayersOnly(plugin.getMainConfigManager().getPrefix() + message);
                 }
-            }.runTaskTimer(plugin, warningDelay,
-                    plugin.getMainConfigManager().getAutoClearInterval() * 20L).getTaskId();
+            }.runTaskTimer(plugin, schedule.warningDelayTicks(), schedule.clearDelayTicks()).getTaskId();
         }
     }
 
     public void stopTasks() {
-        if (taskId != -1)
+        if (taskId != -1) {
             Bukkit.getScheduler().cancelTask(taskId);
-        if (warningTaskId != -1)
+            taskId = -1;
+        }
+        if (warningTaskId != -1) {
             Bukkit.getScheduler().cancelTask(warningTaskId);
+            warningTaskId = -1;
+        }
     }
 
     public void reloadTasks() {

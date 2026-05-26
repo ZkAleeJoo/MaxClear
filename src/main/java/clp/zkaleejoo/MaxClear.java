@@ -23,11 +23,13 @@ public class MaxClear extends JavaPlugin {
     // PLUGIN ENCIENDE
     @Override
     public void onEnable() {
+        mainConfigManager = new MainConfigManager(this);
         registerCommands();
         syncMetricsState();
         registerEvents();
-        mainConfigManager = new MainConfigManager(this);
-        checkUpdates();
+        if (mainConfigManager.isUpdateCheckEnabled()) {
+            checkUpdates();
+        }
         taskManager = new TaskManager(this);
         taskManager.startTasks();
 
@@ -82,6 +84,10 @@ public class MaxClear extends JavaPlugin {
         return taskManager;
     }
 
+    public void reloadRuntimeSettings() {
+        syncMetricsState();
+    }
+
     private void checkUpdates() {
         new UpdateChecker(this).getVersion(version -> {
             if (this.getPluginMeta().getVersion().equalsIgnoreCase(version)) {
@@ -98,7 +104,7 @@ public class MaxClear extends JavaPlugin {
     }
 
     private void syncMetricsState() {
-        if (getMainConfigManager().isBStatsEnabled()) {
+        if (mainConfigManager != null && mainConfigManager.isBStatsEnabled()) {
             if (metrics == null) {
                 metrics = new Metrics(this, BSTATS_PLUGIN_ID);
             }

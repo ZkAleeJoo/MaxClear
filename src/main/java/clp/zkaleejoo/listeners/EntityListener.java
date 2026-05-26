@@ -31,7 +31,7 @@ public class EntityListener implements Listener {
         Entity entity = event.getEntity();
 
         if (entity instanceof Player
-                || plugin.getMainConfigManager().getEntitiesExclude().contains(entity.getType().name())) {
+                || plugin.getMainConfigManager().getResolvedEntitiesExclude().contains(entity.getType().name())) {
             return;
         }
 
@@ -40,7 +40,7 @@ public class EntityListener implements Listener {
 
         long count = Arrays.stream(chunk.getEntities())
                 .filter(e -> !(e instanceof Player))
-                .filter(e -> !plugin.getMainConfigManager().getEntitiesExclude().contains(e.getType().name()))
+                .filter(e -> !plugin.getMainConfigManager().getResolvedEntitiesExclude().contains(e.getType().name()))
                 .count();
 
         if (count >= maxEntities) {

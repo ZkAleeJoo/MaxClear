@@ -2,7 +2,7 @@ main: clp.zkaleejoo.MaxClear
 version: ${project.version}
 name: MaxClear
 author: ZkAleeJoo
-api-version: 1.19
+api-version: 1.21
 
 commands:
   maxclear:

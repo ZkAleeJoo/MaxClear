@@ -53,11 +53,11 @@ public class EntityClearer {
     }
 
     private boolean shouldRemoveEntity(Entity entity) {
-        if (!config.getEntitiesTypes().contains(entity.getType().name())) {
+        if (!config.getResolvedEntitiesTypes().contains(entity.getType().name())) {
             return false;
         }
 
-        if (config.getEntitiesExclude().contains(entity.getType().name())) {
+        if (config.getResolvedEntitiesExclude().contains(entity.getType().name())) {
             return false;
         }
 

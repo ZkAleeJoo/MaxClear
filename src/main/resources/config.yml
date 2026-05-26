@@ -53,13 +53,14 @@ entities:
     - ARMOR_STAND
     - PAINTING
     - MINECART
-    - BOAT
-    - MINECART_CHEST # Add other types of minecarts
-    - MINECART_FURNACE
-    - MINECART_HOPPER
-    - MINECART_TNT
-    - MINECART_MOB_SPAWNER
-    - MINECART_COMMAND
+    - BOAT # Alias: all regular boat variants
+    - CHEST_BOAT # Alias: all chest boat variants
+    - CHEST_MINECART
+    - FURNACE_MINECART
+    - HOPPER_MINECART
+    - TNT_MINECART
+    - SPAWNER_MINECART
+    - COMMAND_BLOCK_MINECART
 
   # Additional settings
   settings:

@@ -39,7 +39,8 @@ public class UpdateChecker {
                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
                     String latestVersion = reader.readLine();
                     if (latestVersion != null && !latestVersion.isBlank()) {
-                        consumer.accept(latestVersion.trim());
+                        String trimmedVersion = latestVersion.trim();
+                        Bukkit.getScheduler().runTask(plugin, () -> consumer.accept(trimmedVersion));
                     } else {
                         plugin.getLogger().info("The version is empty.");
                     }
