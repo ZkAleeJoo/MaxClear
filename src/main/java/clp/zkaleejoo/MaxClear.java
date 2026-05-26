@@ -11,6 +11,7 @@ import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
 public class MaxClear extends JavaPlugin {
 
@@ -18,7 +19,10 @@ public class MaxClear extends JavaPlugin {
     private MainConfigManager mainConfigManager;
     private TaskManager taskManager;
     private static final int BSTATS_PLUGIN_ID = 31581;
+    private static final long UPDATE_CHECK_INTERVAL_TICKS = 20L * 60L * 60L * 5L;
     private Metrics metrics;
+    private BukkitTask updateCheckTask;
+    private String latestVersion;
 
     // PLUGIN ENCIENDE
     @Override
@@ -47,6 +51,8 @@ public class MaxClear extends JavaPlugin {
                 + "&e        \\/         \\/      \\_/        \\/        \\/        \\/         \\/       \\/ "));
         Bukkit.getConsoleSender()
                 .sendMessage(MessageUtils.getColoredMessage(prefix + "&eIt was activated correctly in the version"));
+
+        startUpdateChecks();
     }
 
     @Override
@@ -88,11 +94,32 @@ public class MaxClear extends JavaPlugin {
         syncMetricsState();
     }
 
+    private void startUpdateChecks() {
+        if (updateCheckTask != null) {
+            updateCheckTask.cancel();
+            updateCheckTask = null;
+        }
+
+        if (!getMainConfigManager().isUpdateCheckEnabled()) {
+            return;
+        }
+
+        checkUpdates();
+        updateCheckTask = Bukkit.getScheduler().runTaskTimer(this, this::checkUpdates,
+                UPDATE_CHECK_INTERVAL_TICKS, UPDATE_CHECK_INTERVAL_TICKS);
+    }
+
     private void checkUpdates() {
+        if (!getMainConfigManager().isUpdateCheckEnabled())
+            return;
+
         new UpdateChecker(this).getVersion(version -> {
             if (this.getPluginMeta().getVersion().equalsIgnoreCase(version)) {
-                getLogger().info("You are using the latest version!");
+                this.latestVersion = null;
+                Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessage(
+                        "&e&lMaxClear &8» &aA check for updates was performed and nothing was found."));
             } else {
+                this.latestVersion = version;
 
                 Bukkit.getConsoleSender()
                         .sendMessage(MessageUtils.getColoredMessage("&e&lMaxClear &8» &f&lNEW VERSION: &7" + version));
@@ -115,6 +142,10 @@ public class MaxClear extends JavaPlugin {
             metrics.shutdown();
             metrics = null;
         }
+    }
+
+    public String getLatestVersion() {
+        return latestVersion;
     }
 
 }
