@@ -87,10 +87,6 @@ public class MaxClear extends JavaPlugin {
         return taskManager;
     }
 
-    public void reloadRuntimeSettings() {
-        syncMetricsState();
-    }
-
     private void startUpdateChecks() {
         if (updateCheckTask != null) {
             updateCheckTask.cancel();

@@ -28,7 +28,6 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                 sender.sendMessage(MessageUtils.getColoredMessage(
                         plugin.getMainConfigManager().getPrefix() + plugin.getMainConfigManager().getPluginReload()));
                 plugin.getMainConfigManager().reloadConfig();
-                plugin.reloadRuntimeSettings();
                 plugin.getTaskManager().reloadTasks();
                 return true;
 
@@ -59,7 +58,6 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                 sender.sendMessage(MessageUtils.getColoredMessage(
                         plugin.getMainConfigManager().getPrefix() + plugin.getMainConfigManager().getPluginReload()));
                 plugin.getMainConfigManager().reloadConfig();
-                plugin.reloadRuntimeSettings();
                 plugin.getTaskManager().reloadTasks();
 
             } else if (args[0].equalsIgnoreCase("get")) {
