@@ -31,9 +31,6 @@ public class MaxClear extends JavaPlugin {
         registerCommands();
         syncMetricsState();
         registerEvents();
-        if (mainConfigManager.isUpdateCheckEnabled()) {
-            checkUpdates();
-        }
         taskManager = new TaskManager(this);
         taskManager.startTasks();
 
