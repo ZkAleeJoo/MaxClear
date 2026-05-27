@@ -34,6 +34,8 @@ messages:
   subcommand-invalid: "&cInvalid subcommand. Use /maxclear help to see the available commands."
   subcommand-specified: "&cPlease specify a subcommand. Use /maxclear help to see the available commands."
   update-available: "&eA new version of MaxClear is available! (&b{version}&e)"
+  update-current: "&7Your current version: &c{version}"
+  update-download: "&eDownload it to get improvements and fixes."
 
 # Entity removal configuration
 entities:

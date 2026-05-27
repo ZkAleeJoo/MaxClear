@@ -30,6 +30,9 @@ public class MainConfigManager {
     private String messageConsole;
     private String subcommandInvalid;
     private String subcommandSpecified;
+    private String msgUpdateAvailable;
+    private String msgUpdateCurrent;
+    private String msgUpdateDownload;
     private Boolean chunkLimitEnabled;
     private Integer chunkLimitMax;
     private boolean updateCheckEnabled;
@@ -63,6 +66,12 @@ public class MainConfigManager {
         messageConsole = config.getString("messages.message-console");
         subcommandInvalid = config.getString("messages.subcommand-invalid");
         subcommandSpecified = config.getString("messages.subcommand-specified");
+        msgUpdateAvailable = config.getString("messages.update-available",
+                "&f&lNEW VERSION: &7{version}");
+        msgUpdateCurrent = config.getString("messages.update-current",
+                "&7Your current version: &c{version}");
+        msgUpdateDownload = config.getString("messages.update-download",
+                "&eDownload it to get improvements and fixes.");
 
         chunkLimitEnabled = config.getBoolean("chunk-limit.enabled");
         chunkLimitMax = config.getInt("chunk-limit.max", 50);
@@ -153,6 +162,18 @@ public class MainConfigManager {
 
     public String getSubcommandSpecified() {
         return subcommandSpecified;
+    }
+
+    public String getMsgUpdateAvailable() {
+        return msgUpdateAvailable;
+    }
+
+    public String getMsgUpdateCurrent() {
+        return msgUpdateCurrent;
+    }
+
+    public String getMsgUpdateDownload() {
+        return msgUpdateDownload;
     }
 
     public Boolean isChunkLimitEnabled() {

@@ -3,6 +3,7 @@ package clp.zkaleejoo;
 import clp.zkaleejoo.commands.MainCommand;
 import clp.zkaleejoo.config.MainConfigManager;
 import clp.zkaleejoo.listeners.EntityListener;
+import clp.zkaleejoo.listeners.PlayerJoinListener;
 import clp.zkaleejoo.managers.TaskManager;
 import clp.zkaleejoo.utils.MessageUtils;
 import clp.zkaleejoo.utils.UpdateChecker;
@@ -15,6 +16,7 @@ import org.bukkit.scheduler.BukkitTask;
 
 public class MaxClear extends JavaPlugin {
 
+    public static final String UPDATE_DOWNLOAD_URL = "https://modrinth.com/plugin/maxclear";
     public static String prefix = "&e&lMaxClear &8» ";
     private MainConfigManager mainConfigManager;
     private TaskManager taskManager;
@@ -87,6 +89,7 @@ public class MaxClear extends JavaPlugin {
 
     public void registerEvents() {
         getServer().getPluginManager().registerEvents(new EntityListener(this), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
     }
 
     public MainConfigManager getMainConfigManager() {
@@ -114,6 +117,7 @@ public class MaxClear extends JavaPlugin {
         }
 
         if (!getMainConfigManager().isUpdateCheckEnabled()) {
+            latestVersion = null;
             return;
         }
 
@@ -138,7 +142,7 @@ public class MaxClear extends JavaPlugin {
                         .sendMessage(MessageUtils.getColoredMessage("&e&lMaxClear &8» &f&lNEW VERSION: &7" + version));
                 Bukkit.getConsoleSender().sendMessage(
                         MessageUtils.getColoredMessage(
-                                "&e&lMaxClear &8» &fDownload it now at the following link: &7https://modrinth.com/plugin/maxclear"));
+                                "&e&lMaxClear &8» &fDownload it now at the following link: &7" + UPDATE_DOWNLOAD_URL));
             }
         });
     }
